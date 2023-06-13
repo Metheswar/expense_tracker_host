@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import InputForm from "./Components/InputForm";
+import ExpenseList from "./Components/ExpenseList";
+import Balance from "./Components/Balance";
+import "./Components/Style.css";
 
-function App() {
+const App = () => {
+  const [expenses, setExpenses] = useState([]);
+  const [balance, setBalance] = useState(0);
+
+  const addExpenseHandler = (expense) => {
+    setExpenses((prevExpenses) => [...prevExpenses, expense]);
+
+    if (expense.selectedOption === "Income") {
+      setBalance((prevBalance) => prevBalance + expense.amount);
+    } else if (expense.selectedOption === "Expense") {
+      setBalance((prevBalance) => prevBalance - expense.amount);
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Expense Tracker</h1>
+      <Balance className="App" balance={balance} />
+      <InputForm onAddExpense={addExpenseHandler} />
+      <ExpenseList expenses={expenses} />
     </div>
   );
-}
+};
 
 export default App;
