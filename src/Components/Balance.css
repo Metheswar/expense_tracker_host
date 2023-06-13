@@ -1,0 +1,14 @@
+.BalanceContainer {
+    background-color: #b4e2d2; /* Pastel Green */
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .BalanceText {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+    color: black;
+  }
+  

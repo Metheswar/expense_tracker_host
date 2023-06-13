@@ -39,7 +39,12 @@ const InputForm = ({ onAddExpense }) => {
     <div className="InputContainer">
       <div className="Input">
         <label>Amount: </label>
-        <input type="text" value={amount} onChange={handleAmountChange} />
+        <input
+          type="number"
+          min="1"
+          value={amount}
+          onChange={handleAmountChange}
+        />
 
         <label>Description: </label>
         <input type="text" value={description} onChange={handleDescriptionChange} />

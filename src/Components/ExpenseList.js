@@ -43,7 +43,7 @@ const ExpenseList = ({ expenses }) => {
         <thead>
           <tr>
             <th>Amount</th>
-            <th>Description</th>
+            <th className="DescriptionHeading">Description</th>
             <th>Expense/Income</th>
           </tr>
         </thead>
