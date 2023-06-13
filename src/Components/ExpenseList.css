@@ -10,18 +10,13 @@
   margin-bottom: 20px;
 }
 
-.ExpenseTable th {
-  padding: 10px;
-  text-align: center;
-  border-bottom: 1px solid #ddd;
-  width: 200px;
-}
-
+.ExpenseTable th,
 .ExpenseTable td {
   padding: 10px;
-  text-align: left;
+  text-align: center; /* Align center for td cells */
   border-bottom: 1px solid #ddd;
 }
+
 
 .DescriptionHeading {
   text-align: center;
