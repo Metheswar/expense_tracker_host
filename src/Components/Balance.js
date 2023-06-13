@@ -4,7 +4,7 @@ import './Balance.css';
 const Balance = ({ balance }) => {
   return (
     <div className="BalanceContainer">
-      <h2 className="BalanceText">Balance: ${balance}</h2>
+      <h2 className="BalanceText">Balance: ₹{balance}</h2>
     </div>
   );
 };
