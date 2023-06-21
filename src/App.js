@@ -6,7 +6,9 @@ import './Components/Style.css';
 
 const App = () => {
  
-  const [balance, setBalance] = useState(0);
+  const [balance, setBalance] = useState(
+    JSON.parse(localStorage.getItem('balance')) || 0
+  );
   const [expenses, setExpenses] = useState(
     JSON.parse(localStorage.getItem('expenses')) || []
   );
@@ -16,6 +18,7 @@ const App = () => {
   const [totalIncome, setTotalIncome] = useState(
     JSON.parse(localStorage.getItem('totalIncome')) || 0
   );
+  
   
   useEffect(() => {
     // Retrieve data from local storage on page load
