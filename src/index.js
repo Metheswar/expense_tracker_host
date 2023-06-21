@@ -6,8 +6,14 @@ import App from "./App";
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
 
+const disableTextSelection = {
+  userSelect: "none",
+};
+
 root.render(
   <StrictMode>
-    <App />
+    <div style={disableTextSelection}>
+      <App />
+    </div>
   </StrictMode>
 );

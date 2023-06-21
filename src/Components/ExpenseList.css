@@ -5,6 +5,7 @@
   border-radius: 5px;
   display: flex;
   flex-direction: column;
+  
 }
 
 /* Styles for ExpenseTable */
@@ -12,6 +13,7 @@
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
+  user-select:text;
 }
 
 .ExpenseTable th,
