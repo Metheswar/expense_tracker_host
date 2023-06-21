@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './ExpenseList.css';
 
-const TotalIncome = ({ income }) => {
+const TotalIncomes = ({ income }) => {
   return (
     <div className="TotalContainer IncomeContainer">
       <h3>Total Income</h3>
@@ -10,7 +10,7 @@ const TotalIncome = ({ income }) => {
   );
 };
 
-const TotalExpenses = ({ expenses }) => {
+const TotalExpense = ({ expenses }) => {
   return (
     <div className="TotalContainer ExpenseContainer">
       <h3>Total Expenses</h3>
@@ -19,25 +19,49 @@ const TotalExpenses = ({ expenses }) => {
   );
 };
 
-const ExpenseList = ({ expenses }) => {
-  const incomeExpenses = expenses.reduce(
-    (acc, expense) => {
-      if (expense.selectedOption === 'Income') {
-        acc.income += expense.amount;
-      } else if (expense.selectedOption === 'Expense') {
-        acc.expenses += expense.amount;
-      }
-      return acc;
-    },
-    { income: 0, expenses: 0 }
-  );
+const ExpenseList = ({
+  expenses,
+  setTotalExpenses,
+  totalExpenses,
+  setTotalIncome,
+  totalIncome
+}) => {
+  useEffect(() => {
+    const incomeExpenses = expenses.reduce(
+      (acc, expense) => {
+        if (expense.selectedOption === 'Income') {
+          acc.income += expense.amount;
+        } else if (expense.selectedOption === 'Expense') {
+          acc.expenses += expense.amount;
+        }
+        return acc;
+      },
+      { income: 0, expenses: 0 }
+    );
+
+    setTotalExpenses(incomeExpenses.expenses);
+    setTotalIncome(incomeExpenses.income);
+  }, [expenses, setTotalExpenses, setTotalIncome]);
+
+  if (expenses.length === 0) {
+    return (
+      <div className="ExpenseListContainer">
+        <h2>Expenses:</h2>
+        <div className="SummaryContainer">
+          <TotalIncomes income={totalIncome} />
+          <TotalExpense expenses={totalExpenses} />
+        </div>
+        <p>No items to display</p>
+      </div>
+    );
+  }
 
   return (
     <div className="ExpenseListContainer">
       <h2>Expenses:</h2>
       <div className="SummaryContainer">
-        <TotalIncome income={incomeExpenses.income} />
-        <TotalExpenses expenses={incomeExpenses.expenses} />
+        <TotalIncomes income={totalIncome} />
+        <TotalExpense expenses={totalExpenses} />
       </div>
       <table className="ExpenseTable">
         <thead>
@@ -51,17 +75,20 @@ const ExpenseList = ({ expenses }) => {
           {expenses.map((expense) => (
             <tr key={expense.id}>
               <td
-                className={`AmountCell ${expense.selectedOption === 'Expense' ? 'Expense' : 'Income'}`}
+                className={`AmountCell ${
+                  expense.selectedOption === 'Expense' ? 'Expense' : 'Income'
+                }`}
               >
                 ₹{expense.amount}
               </td>
               <td>{expense.description}</td>
-              <td>{expense.selectedOption === 'Expense' ? 'Expense' : 'Income'}</td>
+              <td>
+                {expense.selectedOption === 'Expense' ? 'Expense' : 'Income'}
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
-    
     </div>
   );
 };
